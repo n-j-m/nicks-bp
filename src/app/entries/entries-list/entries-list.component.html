@@ -1,0 +1,52 @@
+<button mat-fab color="primary" (click)="addOne()"><mat-icon>add</mat-icon></button>
+<div class="flex-container mat-elevation-z8">
+  <div class="table-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid">
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+      <mat-cell *matCellDef="let entry">{{ entry.type }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
+      <mat-cell *matCellDef="let entry">{{ toTimeString(entry.time) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="systolic">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Systolic</mat-header-cell>
+      <mat-cell *matCellDef="let entry">{{ entry.systolic }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="diastolic">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Diastolic</mat-header-cell>
+      <mat-cell *matCellDef="let entry">{{ entry.diastolic }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pulse">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pulse</mat-header-cell>
+      <mat-cell *matCellDef="let entry">{{ entry.pulse }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let entry">
+        <button mat-raised-button color="primary" (click)="openDialog(entry)">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let entry">
+        <button mat-raised-button color="primary" (click)="deleteEntry(entry)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns" class="animate"></mat-row>
+  </mat-table>
+</div>
