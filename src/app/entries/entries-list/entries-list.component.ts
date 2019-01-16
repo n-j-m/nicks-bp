@@ -50,7 +50,7 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
 
   openDialog(entry: BPEntry) {
     this._dialog.open(EditEntryDialogComponent, {
-      width: '350px',
+      width: '480px',
       data: entry,
     });
   }

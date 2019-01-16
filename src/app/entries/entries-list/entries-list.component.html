@@ -33,14 +33,14 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let entry">
         <button mat-raised-button color="primary" (click)="openDialog(entry)">Edit</button>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Delete</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let entry">
         <button mat-raised-button color="primary" (click)="deleteEntry(entry)">Delete</button>
       </mat-cell>

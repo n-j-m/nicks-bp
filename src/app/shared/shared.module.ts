@@ -12,6 +12,9 @@ import {
   MatSortModule,
   MatInputModule,
   MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -41,6 +44,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSortModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     RouterModule,
@@ -62,6 +68,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSortModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class SharedModule {}

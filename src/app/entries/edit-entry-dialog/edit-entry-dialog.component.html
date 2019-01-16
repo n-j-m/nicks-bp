@@ -1,3 +1,26 @@
-<p>
-  edit-entry-dialog works!
-</p>
+<h1 mat-dialog-title>Edit BP Entry</h1>
+<div mat-dialog-content class="flex-container" [formGroup]="entryForm">
+  <mat-form-field>
+    <mat-select placeholder="Reading Type" formControlName="type">
+      <mat-option value="morning">Morning</mat-option>
+      <mat-option value="evening">Evening</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Reading Date" formControlName="date" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Reading Time" formControlName="time" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Systolic" formControlName="systolic" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Diastolic" formControlName="diastolic" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Pulse" formControlName="pulse" />
+  </mat-form-field>
+</div>
