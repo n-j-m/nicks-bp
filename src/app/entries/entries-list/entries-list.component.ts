@@ -49,10 +49,20 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
   }
 
   openDialog(entry: BPEntry) {
-    this._dialog.open(EditEntryDialogComponent, {
-      width: '480px',
-      data: entry,
-    });
+    this._dialog
+      .open(EditEntryDialogComponent, {
+        width: '480px',
+        data: entry,
+      })
+      .afterClosed()
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(newEntry => {
+        const index = this.dataSource.data.findIndex(e => e.uid === newEntry.uid);
+        console.log(index, newEntry);
+        const data = this.dataSource.data;
+        data[index] = newEntry;
+        this.dataSource = new MatTableDataSource(data);
+      });
   }
 
   deleteEntry(entry: BPEntry) {
@@ -72,7 +82,7 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
   }
 
   toTimeString(time: number): string {
-    return dayjs(time).toString();
+    return dayjs(time).format('ddd, MMM D YYYY hh:mm:ss');
   }
 
   trackByUid(_: number, entry: BPEntry) {

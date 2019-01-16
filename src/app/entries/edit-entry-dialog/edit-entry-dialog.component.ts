@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { BPEntry } from '../models/bp-entry';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import * as dayjs from 'dayjs';
 
 function bpTypeValidator(c: AbstractControl) {
   const result = c.value === 'morning' || c.value === 'evening';
@@ -22,7 +26,16 @@ export class EditEntryDialogComponent implements OnInit {
     pulse: [0, [Validators.required, Validators.min(1)]],
   });
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    public dialogRef: MatDialogRef<EditEntryDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: BPEntry,
+  ) {
+    console.log('data:', data);
+    const date = dayjs(data.time).toISOString();
+    const time = dayjs(data.time).format('hh:mm:ss');
+    this.entryForm.setValue({ ...data, date, time });
+  }
 
   ngOnInit() {}
 
@@ -43,5 +56,10 @@ export class EditEntryDialogComponent implements OnInit {
   }
   get pulse() {
     return this.entryForm.get('pulse');
+  }
+
+  saveEntry() {
+    console.log('entry:', this.entryForm.value);
+    this.dialogRef.close(this.entryForm.value);
   }
 }

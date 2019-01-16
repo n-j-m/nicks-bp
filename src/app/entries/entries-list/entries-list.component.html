@@ -1,11 +1,5 @@
 <button mat-fab color="primary" (click)="addOne()"><mat-icon>add</mat-icon></button>
 <div class="flex-container mat-elevation-z8">
-  <div class="table-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
-    </mat-form-field>
-  </div>
-
   <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid">
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
