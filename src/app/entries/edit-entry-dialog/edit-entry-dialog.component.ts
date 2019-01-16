@@ -60,6 +60,17 @@ export class EditEntryDialogComponent implements OnInit {
 
   saveEntry() {
     console.log('entry:', this.entryForm.value);
-    this.dialogRef.close(this.entryForm.value);
+    const { uid, type, date, time, systolic, diastolic, pulse } = this.entryForm.value;
+    const newEntry: BPEntry = {
+      uid,
+      type,
+      systolic,
+      diastolic,
+      pulse,
+      time: dayjs(`${dayjs(date).format('YYYY-MM-DD')} ${time}`)
+        .toDate()
+        .getTime(),
+    };
+    this.dialogRef.close(newEntry);
   }
 }
