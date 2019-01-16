@@ -57,11 +57,7 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
       .afterClosed()
       .pipe(takeUntil(this._onDestroy))
       .subscribe(newEntry => {
-        const index = this.dataSource.data.findIndex(e => e.uid === newEntry.uid);
-        console.log(index, newEntry);
-        const data = this.dataSource.data;
-        data[index] = newEntry;
-        this.dataSource = new MatTableDataSource(data);
+        this._entiresCollection.doc(newEntry.uid).set(newEntry);
       });
   }
 
