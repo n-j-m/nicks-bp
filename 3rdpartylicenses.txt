@@ -467,9 +467,9 @@ MIT
 
 @angular/material/sort
 
-@angular/material/table
-
 @angular/material/button
+
+@angular/material/table
 
 @angular/material/icon
 
