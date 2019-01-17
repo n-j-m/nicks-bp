@@ -19,7 +19,7 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
 
   entries: Observable<BPEntry[]>;
 
-  displayColumns = ['type', 'time', 'systolic', 'diastolic', 'pulse', 'edit', 'delete'];
+  displayColumns = ['time', 'type', 'systolic', 'diastolic', 'pulse', 'delete'];
   dataSource: MatTableDataSource<BPEntry>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -27,7 +27,9 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
   constructor(_afs: AngularFirestore, _authService: AuthService, private _dialog: MatDialog) {
     this.entries = _authService.user$.pipe(
       switchMap(user => {
-        this._entiresCollection = _afs.collection<BPEntry>(`users/${user.uid}/entries`);
+        this._entiresCollection = _afs.collection<BPEntry>(`users/${user.uid}/entries`, ref =>
+          ref.orderBy('time'),
+        );
         return this._entiresCollection.valueChanges();
       }),
     );
@@ -57,6 +59,9 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
       .afterClosed()
       .pipe(takeUntil(this._onDestroy))
       .subscribe(newEntry => {
+        if (!newEntry) {
+          return;
+        }
         this._entiresCollection.doc(newEntry.uid).set(newEntry);
       });
   }
@@ -78,10 +83,14 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
   }
 
   toTimeString(time: number): string {
-    return dayjs(time).format('ddd, MMM D YYYY hh:mm:ss');
+    return dayjs(time).format('YYYY-MM-DD');
   }
 
   trackByUid(_: number, entry: BPEntry) {
     return entry.uid;
+  }
+
+  getTypeIcon(entryType: string) {
+    return entryType === 'morning' ? '/assets/morning_32.png' : '/assets/evening_32.png';
   }
 }

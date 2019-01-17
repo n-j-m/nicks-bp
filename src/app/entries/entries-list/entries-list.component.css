@@ -31,3 +31,13 @@ button.mat-fab {
   bottom: 48px;
   right: 48px;
 }
+
+.mat-row {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .entry-when {
+    font-size: 0.6rem;
+  }
+}

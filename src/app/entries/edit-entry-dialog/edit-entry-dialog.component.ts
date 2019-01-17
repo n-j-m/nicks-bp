@@ -31,7 +31,6 @@ export class EditEntryDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditEntryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: BPEntry,
   ) {
-    console.log('data:', data);
     const date = dayjs(data.time).toISOString();
     const time = dayjs(data.time).format('hh:mm:ss');
     this.entryForm.setValue({ ...data, date, time });
@@ -59,7 +58,6 @@ export class EditEntryDialogComponent implements OnInit {
   }
 
   saveEntry() {
-    console.log('entry:', this.entryForm.value);
     const { uid, type, date, time, systolic, diastolic, pulse } = this.entryForm.value;
     const newEntry: BPEntry = {
       uid,
