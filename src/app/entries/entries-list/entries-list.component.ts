@@ -91,6 +91,6 @@ export class EntriesListComponent implements AfterViewInit, OnDestroy {
   }
 
   getTypeIcon(entryType: string) {
-    return entryType === 'morning' ? '/assets/morning_32.png' : '/assets/evening_32.png';
+    return entryType === 'morning' ? 'assets/morning_32.png' : 'assets/evening_32.png';
   }
 }
