@@ -32,7 +32,7 @@ export class EditEntryDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: BPEntry,
   ) {
     const date = dayjs(data.time).toISOString();
-    const time = dayjs(data.time).format('hh:mm:ss');
+    const time = dayjs(data.time).format('hh:mm A');
     this.entryForm.setValue({ ...data, date, time });
   }
 
